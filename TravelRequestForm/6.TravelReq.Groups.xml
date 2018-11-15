@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
+  <groups xmlns="ns:workflow/Group" xsi:schemaLocation="ns:workflow/Group resource:Group">
+  	<group>
+  		<name>UGS.TravelReq.UGS1</name>
+  		<namespace>UGS.TRAVELREQ</namespace>
+  		<description>Travel Request Approver</description>
+  		<active>true</active>
+  		<type>
+  			<namespace>KUALI</namespace>
+  			<name>Default</name>
+  		</type>
+  		<members>
+  			<principalName>kbunch</principalName>
+  		</members>
+  	</group>
+  </groups>
+</data>

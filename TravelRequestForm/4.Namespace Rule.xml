@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
+  <rules xmlns="ns:workflow/Rule" xsi:schemaLocation="ns:workflow/Rule resource:Rule">
+    <rule>
+      <documentType>IdentityManagementGroupDocument</documentType>
+      <ruleTemplate>GroupNamespaceTemplate</ruleTemplate>
+      <description>Group routing for namespace UGS.TRAVELREQ</description>
+      <forceAction>false</forceAction>
+      <ruleExtensions>
+        <ruleExtension>
+          <attribute>GroupNamespaceAttribute</attribute>
+          <ruleTemplate>GroupNamespaceTemplate</ruleTemplate>
+          <ruleExtensionValues>
+            <ruleExtensionValue>
+              <key>groupNamespace</key>
+              <value>UGS.TRAVELREQ</value>
+            </ruleExtensionValue>
+          </ruleExtensionValues>
+        </ruleExtension>
+      </ruleExtensions>
+      <!--<responsibilities>
+        <responsibility>
+          <groupName namespace="UGS.TRAVELREQ">UGS.TravelReq.SuperUsers</groupName>
+          <actionRequested>A</actionRequested>
+          <priority>1</priority>
+        </responsibility>
+      </responsibilities>-->
+    </rule>
+  </rules>
+</data>

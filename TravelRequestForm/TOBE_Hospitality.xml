@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData"><edoclite xmlns="ns:workflow/EDocLite" xsi:schemaLocation="ns:workflow/EDocLite resource:EDocLite"><edl name="UGSHospitality_xml" title="UGS Hospitality">
+      <security />
+      <createInstructions>*Fields with an asterisk are required.</createInstructions>
+      <instructions>*Fields with an asterisk are required.</instructions>
+      <validations>
+        <!--requiring outside committee member name if outside member is yes-->
+        <!-- <validation key="add" type="xpath">
+          <expression>((wf:field('add') = 'Add' and wf:empty(wf:field('Remove'))) or
+            (wf:empty(wf:field('add')) and wf:field('remove') = 'Remove') or (wf:field('add') =
+            'Add' and wf:field('remove') = 'Remove'))</expression>
+          <message>Indicate if you will be adding or removing someone.</message>
+        </validation>
+        <validation key="replacesAnother" type="xpath">
+          <expression>((wf:field('add') = 'Add' and wf:field('replacesAnother') = 'Yes') or
+            (wf:field('add') = 'Add' and wf:field('replacesAnother') = 'No') or
+            (wf:empty(wf:field('add'))and wf:empty(wf:field('replacesAnother'))))</expression>
+          <message>Indicate if the person you are adding replaces another person. If they do, check
+            the "Remove" box and enter that person's information in the "Remove" section.</message>
+        </validation>
+        <validation key="addFirstName" type="xpath">
+          <expression>((wf:field('add') = 'Add' and not(wf:empty(wf:field('addFirstName')))) and
+            not(wf:empty(wf:field('addLastName'))) and not(wf:empty(wf:field('addUserid')))) or
+            (wf:empty(wf:field('add')) and wf:empty(wf:field('addFirstName')) and
+            wf:empty(wf:field('addLastName')) and wf:empty(wf:field('addUserid'))) </expression>
+          <message>If you are adding someone check the "Add" box and fill out ALL fields in this
+            section. If you are not adding someone uncheck the "Add" box and leave this section
+            blank.</message>
+        </validation>
+        <validation key="removeFirstName" type="xpath">
+          <expression>((wf:field('add') = 'Add' and wf:field('replacesAnother') = 'Yes' and
+            not(wf:empty(wf:field('removeFirstName'))) and not(wf:empty(wf:field('removeLastName')))
+            and not(wf:empty(wf:field('removeUserid')))) or (wf:field('add') = 'Add' and
+            wf:field('replacesAnother') = 'No' and wf:empty(wf:field('removeFirstName')) and
+            wf:empty(wf:field('removeLastName')) and wf:empty(wf:field('removeUserid'))) or
+            (wf:empty(wf:field('add')) and wf:empty(wf:field('replacesAnother'))) or
+            (wf:field('add') = 'Add' and wf:empty(wf:field('replacesAnother'))))</expression>
+          <message>Check the "Remove" box and enter the information of the person being replaced, if
+            no one is being replaced leave the "Remove" section blank.</message>
+        </validation>
+        <validation key="removeFirstName" type="xpath">
+          <expression>((wf:field('remove') = 'Remove' and not(wf:empty(wf:field('removeFirstName')))
+            and not(wf:empty(wf:field('removeLastName'))) and
+            not(wf:empty(wf:field('removeUserid')))) or (wf:empty(wf:field('remove')) and
+            wf:empty(wf:field('removeFirstName')) and wf:empty(wf:field('removeLastName')) and
+            wf:empty(wf:field('removeUserid'))))</expression>
+          <message>If you are removing someone check the "Remove" box and fill out ALL fields in
+            this section. If you are not removing someone uncheck the "Remove" box and leave this
+            section blank.</message>
+        </validation> -->
+      </validations>
+      <!-- <javascript><![CDATA[//
+	    function checkRadio(radioValue) {
+	       if (radioValue == 'Yes' || radioValue == 'No'){
+	           return true;
+	       }
+	       return false;
+	    }]]>
+        <![CDATA[function clearRadios(radioname){
+			for(i = 0;i<document.forms[0].elements[radioname].length; i++){
+				document.forms[0].elements[radioname][i].checked = false;
+			}
+		}]]>
+      </javascript> -->
+      <fieldDef name="reqFirstName" title="First Name">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>First Name</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="reqLastName" title="Last Name">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Last Name</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+      </fieldDef>
+      <fieldDef name="reqUserid" title="userid">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>user id</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>15</value>
+          </meta>
+        </display>
+      </fieldDef>
+
+      <fieldDef name="amountReimbursed" title="Amount of Reimbursement">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Amount of Reimbursement</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="functionName" title="Name of Function">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Name of Function</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="functionDate" title="Date of Function">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Date of Function</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="beginTime" title="Begin Time of Function">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Begin Time of Function</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="endTime" title="End Time of Function">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>End Time of Function</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="functionPlace" title="Place of Function">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Place of Function</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="purpose" title="Purpose/Benefit to the University">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Purpose/Benefit to the University</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="numAttending" title="Number of Persons Attending">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Number of Persons Attending</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="numUnivEmployees" title="# University Employees">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value># University Employees</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="numStudents" title="# Students">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value># Students</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="numOther" title="# Non University Persons">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value># Non University Persons</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="extConsultantName" title="Name of External Training Consultant (if applicable)">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Name of External Training Consultant (if applicable)</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+      <fieldDef name="extConsultantComp" title="Company of External Training Consultant">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>title</name>
+            <value>Company of External Training Consultant (if applicable)</value>
+          </meta>
+          <meta>
+            <name>size</name>
+            <value>40</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+  <fieldDef attributeName="UGSCampusAttribute" name="campus" title="Campus:">
+        <display>
+          <type>select_refresh</type>
+          <meta>
+            <name>title</name>
+            <value>campus</value>
+          </meta>
+          <values title="**Select your campus**">select</values>
+          <values title="IU Bloomington">BL</values>
+          <values title="IUPUI Indianapolis">IN</values>
+        </display>
+        <validation required="true">
+          <regex>[^select]</regex>
+          <message>Please select the campus.</message>
+        </validation>
+      </fieldDef>
+
+
+    </edl><style name="UGSHospitality_xsl"><xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:my-class="xalan://org.kuali.rice.edl.framework.util.EDLFunctions" version="1.0">
+        <xsl:include href="widgets" />
+        <xsl:output indent="yes" method="html" omit-xml-declaration="yes" version="4.01" />
+        <xsl:param name="overrideMain" select="'true'" />
+        <xsl:variable name="campus" select="//edlContent/data/version[@current='true']/field[@name='campus']/value" />
+        <xsl:variable name="deadlineBloomington" select="Bloomington Deadline Text" />
+        <xsl:variable name="deadlineIUPUI" select="IUPUI Deadline Text" />
+        <xsl:variable name="deadlineDefault" select="Default Deadline Text" />
+        <xsl:variable name="docStatus" select="//documentState/workflowDocumentState/status" />
+        <xsl:variable name="editable" select="/documentContent/documentState/editable" />
+        <xsl:variable name="isPastInitiated" select="my-class:isNodeInPreviousNodeList('Initiated', $docHeaderId)" />
+        <xsl:variable name="docHeaderId" select="/documentContent/documentState/docId" />
+        <xsl:variable name="isUserInitiator" select="my-class:isUserInitiator($docHeaderId)" />
+        <xsl:variable name="isValidUser" select="my-class:isUserRouteLogAuthenticated($docHeaderId)" />
+        <xsl:variable name="isSuperUser" select="my-class:isUserInGroup('UGS.PhDComm','UGS.PhDComm.Super')" />
+        <xsl:variable name="actionable" select="/documentContent/documentState/actionable" />
+        <xsl:variable name="isValidUser" select="my-class:isUserRouteLogAuthenticated($docHeaderId)" />
+        <xsl:variable name="isAtNodeInitiated" select="my-class:isAtNode($docHeaderId, 'Initiated')" />
+        <!-- <xsl:variable name="isAtNodeDepartment1a" select="my-class:isAtNode($docHeaderId, 'UGS.PhDCommencement.Department1a')" />
+        <xsl:variable name="isAtNodeDepartment2a" select="my-class:isAtNode($docHeaderId, 'UGS.PhDCommencement.Department2a')" />
+        <xsl:variable name="isAtNodeUGS" select="my-class:isAtNode($docHeaderId, 'UGS.PhDCommencement.UGS')" /> -->
+        <xsl:variable name="globalReadOnly" select="/documentContent/documentState/editable != 'true'" />
+        <xsl:variable name="true" select="'true'" />
+        <xsl:template name="mainForm">
+          <html xmlns="" xml:lang="en">
+            <head>
+              <!-- Added by EJN for Disapprove confirmation popup window -->
+              <script src="scripts/jquery-current.min.js" type="text/javascript" />
+              <script language="javascript"><![CDATA[
+			     jQuery(document).ready(function () {
+					 jQuery('input[value="disapprove"]').bind('click', function () { jQuery('#edoclite').prop('onsubmit', false); return confirm("By clicking disapprove, this form will be final and no longer editable.  It will not be returned to previous node.  Please confirm disapproval."); });
+				});
+			  ]]></script>
+              <xsl:call-template name="htmlHead" />
+              <style type="text/css">option { background-color: #ffffff; color: #000000; }</style>
+            </head>
+            <body onload="onPageLoad()">
+              <xsl:choose>
+                <xsl:when test="($isValidUser = 'true' or $isSuperUser = 'true')">
+                  <xsl:call-template name="errors" />
+                  <xsl:call-template name="header" />
+                  <xsl:call-template name="footer" />
+                                    <!--<form action="{$defaultFormAction}" enctype="multipart/form-data" id="edoclite" method="post" onsubmit="return validateOnSubmit(this)">
+                    <xsl:call-template name="hidden-params" />
+                    <xsl:call-template name="mainBody" />
+                    <br />
+                    <xsl:call-template name="notes" />
+                    <br />
+                    <xsl:call-template name="buttons">
+                      <xsl:with-param name="fname" select="'checkAllAttributes()'" />
+                    </xsl:call-template>
+                  </form>-->
+                  <div id="mainform-div">
+                    <form action="{$defaultFormAction}" enctype="multipart/form-data" id="edoclite" method="post" onsubmit="return validateOnSubmit(this)">
+                      <xsl:call-template name="hidden-params" />
+                      <xsl:call-template name="mainBody" />
+                      <br />
+                      <xsl:call-template name="notes" />
+                      <br />
+                      <xsl:call-template name="buttons">
+                        <xsl:with-param name="fname" select="'checkAllAttributes()'" />
+                      </xsl:call-template>
+                    </form>
+                  </div>
+                  <div id="refresh-message" style="display:none">
+                    <br />
+                    <table align="center" border="1" cellpadding="0" cellspacing="0" width="40%">
+                      <tr>
+                        <td align="center" class="thnormal">
+                          <h2>
+                            <b>
+                              <font color="#ee0000">This form is being refreshed. Please
+                                wait.</font>
+                            </b>
+                          </h2>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </xsl:when>
+                <xsl:otherwise>
+                  <br />
+                  <center>
+                    <h2>
+                      <font color="#660000">You are not authorized to view this document.</font>
+                    </h2>
+                  </center>
+                  <br />
+                </xsl:otherwise>
+              </xsl:choose>
+            </body>
+          </html>
+        </xsl:template>
+        <xsl:template name="mainBody">
+          <script xmlns="" language="javascript"><![CDATA[function newWindow{mywindow = window.open("http://mypage.iu.edu/~grdschl/SignatoryFormCompletionInstructions.html",        "Instructions","toolbar=yes,location=yes,status=yes,menubar=yes,fullscreen=no,scrollbars=yes,resizable=yes,width=600,height=400"); mywindow.moveTo(50,50);}]]></script>
+          <table xmlns="" align="center" border="0" cellpadding="0" cellspacing="0" class="bord-r-t" width="80%">
+            <tr>
+              <td align="left" class="datacell" colspan="100%" height="64">
+                <table border="0" width="100%">
+                  <tr>
+                    <td>
+                      <img alt="Indiana University" src="https://docs.onestart.iu.edu/dav/CAP/iu_white.gif" vspace="0" />
+                      <br />
+                      <font face="times" size="3">University Graduate School</font>
+                      <br />
+                    </td>
+                    <!--<td align="right">
+                      <font face="times" size="3">University Graduate School</font
+                    </td>-->
+                  </tr>
+                  <tr>
+                    <td align="left" colspan="100%">
+                      <br />
+                      <font face="time" size="4">
+                        <b>UGS Hospitality Request Form</b>
+                      </font>
+                      <br />
+                      <font face="time" size="2"> **This form is to be submitted and approved before the arrangment of events.
+                        Any event with a budget exceeding $2,500 needs to be approved by the University (//TODO add form link here).
+                        Hospitality guidelines are available <a href="https://policies.iu.edu/policies/fin-acc-50-hospitality-expenditures/index.html">here</a> for more information.</font>
+                      <br />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!--<tr>
+              <td class="thnormal" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addRemove'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+				<font color="#ee0000">*</font>
+              </td>
+			</tr>
+			<tr>
+              <td class="datacell" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addRemove'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>-->
+            <tr>
+              <td class="thnormal" colspan="100%">Event Information<font color="#ee0000">*</font>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td class="datacell" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'add'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <nbsp />
+                <nbsp />
+                <nbsp />
+                <nbsp /> -- <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'replacesAnother'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <nbsp />
+                <nbsp />
+                <nbsp />
+                <nbsp />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'replacesAnother'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <nbsp />
+                <nbsp />
+                <nbsp />
+                <nbsp />
+                <input onClick="clearRadios('replacesAnother')" type="button" value="Clear" />
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'remove'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr> -->
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <!-- added by EJN-->
+            <tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqLastName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqUserid'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+                <!-- <font face="time" size="2"> (<I>If "Other" please select "Other" in this dropdown box </I>)</font> -->
+              </td>
+              <td class="spacercell" />
+            </tr>
+            <tr>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                  <xsl:with-param name="readOnly" select="'false'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqLastName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                  <xsl:with-param name="readOnly" select="'false'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'reqUserid'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+              </td>
+              <td class="spacercell" />
+            </tr>
+            <!-- ___________________________________________________________ -->
+            <tr> </tr>
+            <tr> </tr>
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'amountReimbursed'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+            </tr>
+            <tr>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'amountReimbursed'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                  <xsl:with-param name="readOnly" select="'false'" />
+                </xsl:call-template>
+              </td>
+            </tr>
+
+
+            <!--<tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'campus'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'campus'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>-->
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td class="thnormal" colspan="100%">
+                <b>ADD</b>: Enter information for person to add.**FERPA and Acceptable Use Policy compliance will be checked prior to addition.**</td>
+            </tr>
+            <tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addLastName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addUserid'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+            </tr>
+            <tr>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addLastName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'addUserid'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td class="thnormal" colspan="100%">
+                <b>REMOVE</b>: Enter information for person to remove </td>
+            </tr>
+            <tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeLastName'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeUserid'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+                <font color="#ee0000">*</font>
+              </td>
+            </tr>
+            <tr>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeFirstName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeLastName'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'removeUserid'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>
+            <!--<tr>
+              <td class="thnormal">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'doTheyReplaceSomeone'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+			  </td>
+			  <td class="thnormal" colspan="2">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'replacesWhom'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+				<nbsp />
+				(This person's access will be removed, so you don't need to submit a separate request.)
+              </td>
+			</tr>
+			<tr>
+              <td class="datacell">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'doTheyReplaceSomeone'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+			  <td class="datacell" colspan="2">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'replacesWhom'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>-->
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td class="thnormal" colspan="100%"> What do they need access to or to be removed
+                  from?<font color="#ee0000">*</font>
+              </td>
+            </tr>
+            <tr>
+              <td class="datacell" colspan="100%">
+                <u>Awards and Fellowships</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'fellowships'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <br />
+                <u>Bulletin</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'bulletin'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <br />
+                <u>eApp</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'eAppAdminCenter'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'eAppApprover'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+				<br />
+				<xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'eAppTraining'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+				 <br />
+<i>Contact Judy Post (Bloomington) or Anita Sale (IUPUI) if you are unsure or have not completed the training.
+				 <br />eApp approval access will not be granted until training is complete.</i>
+                <br />
+                <br />
+                <u>Master's eDoc Approver</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'maAppAdvDeg'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <br />
+                <u>Ph.D. eDoc Approver</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'phdCommencementApp'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'defenseAnnouncement'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'nomResCommittee'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <!-- Added by: DRD, EJN -->
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'nomCandidacy'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <br />
+                <br />
+                <u>Exception Approver</u>
+                <br />
+                <br />
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'exception'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+                <input onClick="clearRadios('exception')" type="button" value="Clear" />
+              </td>
+            </tr>
+            <tr>
+              <td align="left" class="td.white" colspan="100%">
+                <br />
+              </td>
+            </tr>
+            <!--<a href="javascript:newWindow" title="Click for node descriptions">Select which node the signatory will be approving the forms at:</a>-->
+            <tr>
+              <td class="thnormal" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'justificationForRequest'" />
+                  <xsl:with-param name="renderCmd" select="'title'" />
+                </xsl:call-template>
+              </td>
+            </tr>
+            <tr>
+              <td class="datacell" colspan="100%">
+                <xsl:call-template name="widget_render">
+                  <xsl:with-param name="fieldName" select="'justificationForRequest'" />
+                  <xsl:with-param name="renderCmd" select="'input'" />
+                </xsl:call-template>
+              </td>
+            </tr>
+          </table>
+        </xsl:template>
+        <xsl:template name="nbsp">
+          <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+        </xsl:template>
+      </xsl:stylesheet></style><association><docType>UGS.AddRemoveUserRequest.Doctype</docType><definition>AddRemoveUserRequest_xml</definition><style>AddRemoveUserRequest_xsl</style><active>true</active></association></edoclite></data>

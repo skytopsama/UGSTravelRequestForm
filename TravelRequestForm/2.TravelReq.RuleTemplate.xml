@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="ns:workflow resource:WorkflowData">
+  <ruleTemplates xmlns="ns:workflow/RuleTemplate"
+    xsi:schemaLocation="ns:workflow/RuleTemplate resource:RuleTemplate">
+
+<!-- ____________________________________________________________________________________ -->
+
+    <!-- Kim Review and Approval-->
+    <ruleTemplate allowOverwrite="true">
+      <name>UGS.TravelReq.UGS1</name>
+      <description>UGS Review and Approval</description>
+      <attributes><!-- Forms go to Kim regardless of Campus, remove attributes? -->
+        <attribute>
+          <name>UGSCampusAttribute</name>
+          <required>true</required>
+        </attribute>
+      </attributes>
+    </ruleTemplate>
+
+    <!-- Initiator FYI -->
+    <ruleTemplate allowOverwrite="true">
+      <name>UGS.TravelReq.InitiatorFYI</name>
+      <description>UGS Travel Request- Initiator notification of processed</description>
+      <attributes>
+        <attribute>
+          <name>UGSTravelRequestInitiatorAttribute</name>
+          <required>true</required>
+        </attribute>
+      </attributes>
+    </ruleTemplate>
+
+  </ruleTemplates>
+</data>

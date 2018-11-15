@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData"><edoclite xmlns="ns:workflow/EDocLite" xsi:schemaLocation="ns:workflow/EDocLite resource:EDocLite"><edl name="UGS.TravelReq.EDL" title="UGS Travel Request Form">
+      <instructions>*Fields with an asterisk are required.</instructions>
+
+      <javascript>
+        <!-- javascript here -->
+        <![CDATA[//
+		function initForm(node, isEditable, docStatus) {
+			 $(document).ready(function () {
+				//ajaxGetAll();
+			  changePrintCSS();
+				console.log("Current node: " + node);
+			  console.log("Current status: " + docStatus);
+        $('#boolPersonalTime').change(togglePTDates);
+        $('#boolPersonalTime').load(togglePTDates);
+				//hideDivs(node, isEditable);
+			});
+		}
+
+		function changePrintCSS() {
+			$('head').append('<style type="text/css" media="print"> @media print { [class*="col-lg-"] { float: left; padding-right: 2cm; } #footer { display: none; height:0;} #branding-bar { display: none; height:0;} input[type="radio"]{ border:none; width:auto; height:auto; } } </style>');
+		}
+
+		function printForm() {
+		     $('#form-info').hide();
+		        window.print();
+	    }
+
+      function togglePTDates() {
+        var trigger = $('#boolPersonalTime').val();
+
+        console.log(trigger);
+
+        if (trigger == "Yes") {
+          document.getElementById('idPTDates').style.display="block";
+        } else {
+          document.getElementById('idPTDates').style.display="none";
+        }
+      }
+
+		//To change what is visible simple add it in here , by node
+		/*function hideDivs(curNode, isEditable) {
+			switch (curNode) {
+				case "Initiated":
+					$('#DepartmentalInformation').hide();
+					break;
+				default:  //FYIs
+					$('#DepartmentalInformation').hide();
+					break;
+			}
+		}*/
+
+    function checkBrowserCompatibility(){
+			var browser = window.navigator.userAgent;
+			var msie = browser.indexOf("MSIE ");
+			if(navigator.userAgent.indexOf("IE") != -1 ) {
+				var versionNum = parseInt(browser.substring(msie + 5, browser.indexOf(".", msie)));
+				if (versionNum < 10) {
+					//They are using an unsupported version of IE. Hide everyhting except warning message
+					var bodyContents = document.getElementsByTagName('body')[0].childNodes;
+					for (var i = 0; i<bodyContents.length; i++) {
+						bodyContents[i].style.display = 'none';
+					}
+					var warningDiv = document.createElement('div');
+					warningDiv.id = 'browserWarning';
+					document.getElementsByTagName('body')[0].appendChild(warningDiv);
+					warningMessage = "<b>Your version of Internet Explorer is out of date!</b>.<br/> \
+					-------------------------------------------------------------------<br/> \
+					If you want to use Internet explorer, please update it to the latest version. Found here: <a href=http://windows.microsoft.com/en-us/internet-explorer/download-ie>Update Internet Explorer</a><br/><br/> \
+					<b>However, it is recommended that you use 'Google Chrome'.</b><br/> \
+					If you do not have 'Google Chrome' you can get it here: <a href='https://www.google.com/chrome/browser/desktop/index.html'>Google Chrome Download</a><br/><br/> Thanks!";
+					warningDiv.innerHTML = warningMessage;
+					warningDiv.style.fontSize = "large";
+					warningDiv.style.margin = "auto";
+					warningDiv.style.width = "80%";
+					warningDiv.style.border = "5px solid #33CC33";
+					warningDiv.style.padding = "10px";
+					warningDiv.style.textAlign = "center";
+				}
+				else{
+					//They are using a supported version of IE...but it's still IE
+					console.log("You are using Internet Explorer. If you experience any problems please try using a different browser (like 'Google Chrome')");
+				}
+			}
+			else {
+				console.log("You are NOT using Internet Explorer.");
+			}
+		}
+               ]]>
+      </javascript>
+      <!-- *******  FIELDDEFS *******       -->
+      <fieldDef name="firstName" title="First Name">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+      <fieldDef name="lastName" title="Last Name">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+      <fieldDef name="middleName" title="Middle Name">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+      <fieldDef name="univID" title="IU Network ID (NOT an email address)">
+        <display>
+          <type>networkId</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+	  <fieldDef name="uid" title="IU University ID (10 digit)">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+      <fieldDef name="email" title="University Email Address">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true">
+          <regex>^(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})$</regex>
+          <message>Please enter your e-mail address in the correct name@domain.com format</message>
+        </validation>
+      </fieldDef>
+
+      <!-- Travel Request fielddefs -->
+      <fieldDef name="fromTravelDate" title="From">
+        <display>
+          <type>date</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="toTravelDate" title="To">
+        <display>
+          <type>date</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="reason" title="Reason">
+        <display>
+          <type>textarea</type>
+          <meta>
+            <name>rows</name>
+            <value>3</value>
+          </meta>
+    		  <meta>
+      			<name>cols</name>
+      			<value>45</value>
+    		  </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="boolPersonalTime" title="Does it include personal time?">
+        <display>
+          <type>select</type>
+          <meta>
+            <name>size</name>
+            <value>3</value>
+          </meta>
+          <values title="No">No</values>
+          <values title="Yes">Yes</values>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="fromPTDate" title="From">
+        <display>
+          <type>date</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="toPTDate" title="To">
+        <display>
+          <type>date</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="false" />
+      </fieldDef>
+
+      <fieldDef name="airfare" title="">
+        <!-- Add note in html "(Please note if airfare is more than $500,
+        please add a note here if this was the best rate possible)" -->
+        <display>
+          <type>textarea</type>
+          <meta>
+            <name>rows</name>
+            <value>3</value>
+          </meta>
+    		  <meta>
+      			<name>cols</name>
+      			<value>45</value>
+    		  </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="hotel" title="">
+        <!-- Add note in html "(Please note if there is a conference rate,
+        we will only reimburse hotel costs up to that maximum conference rate)" -->
+        <display>
+          <type>textarea</type>
+          <meta>
+            <name>rows</name>
+            <value>3</value>
+          </meta>
+    		  <meta>
+      			<name>cols</name>
+      			<value>45</value>
+    		  </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="rentalCar" title="Is a rental car necessary?  If so, please explain.">
+        <display>
+          <type>textarea</type>
+          <meta>
+            <name>rows</name>
+            <value>3</value>
+          </meta>
+    		  <meta>
+      			<name>cols</name>
+      			<value>45</value>
+    		  </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <fieldDef name="accountNum" title="Account Number">
+        <display>
+          <type>text</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+        </display>
+        <validation required="true" />
+      </fieldDef>
+
+      <!-- end -->
+
+      <fieldDef attributeName="UGSCampusAttribute" name="campus" title="Campus">
+        <display>
+          <type>select</type>
+          <meta>
+            <name>size</name>
+            <value>2</value>
+          </meta>
+          <values title="**Select your campus**">Select</values>
+          <values title="IU Bloomington">BL</values>
+          <values title="IUPUI Indianapolis">IN</values>
+        </display>
+        <validation required="true">
+          <regex>^(?!(S|s)elect).*$</regex>
+          <message>Please choose a campus</message>
+        </validation>
+      </fieldDef>
+
+	      <!-- The following fieldDefs are for the fields to store temp info-->
+      <fieldDef name="campusTemp">
+		<display>
+			<type>text</type>
+		</display>
+      </fieldDef>
+	<fieldDef name="campusTitle">
+		<display>
+			<type>text</type>
+		</display>
+    </fieldDef>
+  </edl><style name="UGS.TravelReq.Style"><xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:edl-func="xalan://org.kuali.rice.edl.framework.util.EDLFunctions" version="1.0">
+        <xsl:include href="UGS-widgets-bootstrap" />
+        <xsl:include href="UGS-bootstrap-notes" />
+        <xsl:output indent="yes" method="html" omit-xml-declaration="yes" />
+        <xsl:param name="overrideMain" select="'false'" />
+        <!-- *******  VARIABLES ******* -->
+        <xsl:variable name="docHeaderId" select="/documentContent/documentState/docId" />
+        <xsl:variable name="pageTitle">Travel Request Form</xsl:variable>
+        <xsl:variable name="docTitle">Travel Request</xsl:variable>
+        <xsl:variable name="saveMessage" select="'Your form has been saved. You must select submit to finish.'" />
+        <xsl:variable name="submitMessage" select="'Your form has been submitted. You can now close your browser.'" />
+        <xsl:variable name="approveMessage" select="'The form has been approved'" />
+        <xsl:variable name="disapproveMessage" select="'The form has been disapproved'" />
+        <xsl:variable name="cancelMessage" select="'The form has been canceled'" />
+        <xsl:variable name="blanketApproveMessage" select="'The form has been blanket approved'" />
+        <xsl:variable name="fyiMessage" select="'The fyi was ackowledged'" />
+        <xsl:variable name="acknowledgeMessage" select="'The form has been acknowledged'" />
+        <xsl:variable name="completeMessage" select="'The form has been completed'" />
+        <xsl:variable name="principalId" select="edl-func:getUserId()" />
+        <!-- <xsl:variable name="defaultName" select="edl-func:getDisplayNameByPrincipalId($principalId)" /> -->
+        <xsl:variable name="defaultName" select="edl-func:getInitiatorName($docHeaderId)" />
+            <xsl:variable name="lastName" select="substring-before($defaultName, ',')" />
+            <xsl:variable name="otherPart" select="substring-after($defaultName, ',')" />
+            <xsl:variable name="firstName" select="substring-before(normalize-space($otherPart), ' ')" />
+            <xsl:variable name="middleName" select="substring-after(normalize-space($otherPart), ' ')" />
+            <xsl:variable name="defaultEmail" select="edl-func:getEmailAddress()" />
+            <xsl:variable name="defaultNetworkID" select="edl-func:getAuthenticationId()" />
+            <xsl:variable name="editable" select="/documentContent/documentState/editable" />
+            <xsl:variable name="isEditable" select="boolean($editable='true')" />
+            <xsl:variable name="isUserInitiator" select="edl-func:isUserInitiator($docHeaderId)" />
+            <xsl:variable name="docId" select="/documentContent/documentState/docId" />
+            <xsl:variable name="noteReadOnly" select="'false'" />
+            <xsl:variable name="docStatus" select="//documentState/workflowDocumentState/status" />
+            <xsl:variable name="currentNode" select="edl-func:getCurrentNodeName($docId)" />
+    		<xsl:variable name="isAtNodeInitiated" select="edl-func:isAtNode($docHeaderId, 'Initiated')" />
+    		<xsl:variable name="isNotAtMinorEdits" select="not($isAtNodeInitiated or $isAtNodeUGS1)" />
+    	    <xsl:variable name="isNotAtNodeInitiated" select="not($isAtNodeInitiated)" />
+    		<xsl:variable name="isAtNodeUGS1" select="edl-func:isAtNode($docHeaderId, 'UGS.Exception.UGS1')" />
+    		<xsl:variable name="isAtNodeSECREC1" select="edl-func:isAtNode($docHeaderId, 'UGS.Exception.Department1.SECREC')" />
+    		<xsl:variable name="isAtNodeSECREC2" select="edl-func:isAtNode($docHeaderId, 'UGS.Exception.Department2.SECREC')" />
+        <xsl:variable name="isEditableNetID" select="not($isAtNodeInitiated or $isAtNodeSECREC1 or $isAtNodeSECREC2)" />
+    		<xsl:variable name="isEditableField" select="not($isAtNodeInitiated or $isAtNodeUGS1 or $isAtNodeSECREC1 or $isAtNodeSECREC2)" />
+    		<xsl:variable name="isAtNodeAssistantDean" select="edl-func:isAtNode($docHeaderId, 'UGS.Exception.AssistantDean')" />
+    		<xsl:variable name="notAtUGS1" select="not($isAtNodeUGS1)" />
+            <xsl:variable name="notAtAssistantDean" select="not($isAtNodeAssistantDean)" />
+        <xsl:template name="mainBody">
+          <script xmlns="" type="text/javascript">
+		          checkBrowserCompatibility();
+		      </script>
+		      <script xmlns="" type="text/javascript">
+              initForm('<xsl:value-of select="$currentNode" />', '<xsl:value-of select="$isEditable" />', '<xsl:value-of select="$docStatus" />');
+          </script>
+          <script>
+            togglePTDates();
+          </script>
+          <xsl:call-template name="validationMessages" />
+		  <!-- added per request. Makes Final state more Obvious -->
+		  <xsl:choose>
+			<xsl:when test="$docStatus='FINAL'">
+				<p xmlns="" style="font-size:250%; color:green; font-weight:bold;">FINAL - Approved by UGS</p>
+			</xsl:when>
+		  </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="not($isEditable)">
+              <a xmlns="" class="btn btn-primary pull-right" href="#" onclick="printForm();" title="Print">
+                <i class="fa fa-print fa-lg" />
+              </a>
+            </xsl:when>
+          </xsl:choose>
+      <!-- Contact Information-->
+         <div xmlns="" id="idContactInfo">
+          <h3>Contact Information</h3>
+			<!-- Name-->
+			<!-- Add check if user has NO middle name-->
+			<xsl:choose>
+				<xsl:when test="$middleName">
+			 <xsl:call-template name="inlineWidget">
+              <xsl:with-param name="body">
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'firstName'" />
+				  <xsl:with-param name="default" select="$firstName" />
+				  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'lastName'" />
+                  <xsl:with-param name="default" select="$lastName" />
+                  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'middleName'" />
+                  <xsl:with-param name="default" select="$middleName" />
+				  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+              </xsl:with-param>
+            </xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+			 <xsl:call-template name="inlineWidget">
+              <xsl:with-param name="body">
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'firstName'" />
+				  <xsl:with-param name="default" select="$otherPart" />
+				  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'lastName'" />
+                  <xsl:with-param name="default" select="$lastName" />
+                  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'middleName'" />
+				  <xsl:with-param name="default" select="'.'" />
+				  <xsl:with-param name="readOnly" select="$isNotAtMinorEdits" />
+                </xsl:call-template>
+              </xsl:with-param>
+            </xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
+            <!-- netID and Email-->
+            <xsl:call-template name="inlineWidget">
+              <xsl:with-param name="body">
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'univID'" />
+                  <xsl:with-param name="default" select="$defaultNetworkID" />
+				  <xsl:with-param name="readOnly" select="'true'" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'email'" />
+                  <xsl:with-param name="default" select="$defaultEmail" />
+				  <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                </xsl:call-template>
+                <!-- <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'campus'" />
+          <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                </xsl:call-template> -->
+              </xsl:with-param>
+            </xsl:call-template>
+         </div>
+
+          <!-- Travel Information-->
+          <div xmlns="" id="idTravelInfo">
+            <h3>Travel Information</h3>
+            <br />
+
+            <h5 style="margin:auto; width:86%;"><b>Travel Dates</b></h5>
+            <xsl:call-template name="inlineWidget">
+              <xsl:with-param name="body">
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'fromTravelDate'" />
+          <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                </xsl:call-template>
+                <xsl:call-template name="widget">
+                  <xsl:with-param name="fieldName" select="'toTravelDate'" />
+          <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                </xsl:call-template>
+              </xsl:with-param>
+            </xsl:call-template>
+
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'reason'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'boolPersonalTime'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+            <div xmlns="" id="idPTDates" style="display:none;">
+              <h5 style="margin:auto; width:85%;"><b>What are those dates?</b></h5>
+              <xsl:call-template name="inlineWidget">
+                <xsl:with-param name="body">
+                  <xsl:call-template name="widget">
+                    <xsl:with-param name="fieldName" select="'fromPTDate'" />
+            <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                  </xsl:call-template>
+                  <xsl:call-template name="widget">
+                    <xsl:with-param name="fieldName" select="'toPTDate'" />
+            <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+                  </xsl:call-template>
+                </xsl:with-param>
+              </xsl:call-template>
+            </div>
+
+            <br />
+            <h5 style="margin:auto; width:85%;"><b>Is airfare being booked through egencia?</b></h5>
+            <h5 style="margin:auto; width:85%;">
+              <i>(Please note if airfare is more than $500, please add a note here if this was the best rate possible)</i></h5>
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'airfare'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+
+            <br />
+            <h5 style="margin:auto; width:85%;"><b>Is hotel being booked through hotels.com?</b></h5>
+            <h5 style="margin:auto; width:85%;">
+              <i>(Please note if there is a conference rate, we will only reimburse hotel costs up to that maximum conference rate)</i></h5>
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'hotel'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'rentalCar'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+
+            <xsl:call-template name="widget">
+              <xsl:with-param name="fieldName" select="'accountNum'" />
+      <xsl:with-param name="readOnly" select="$isNotAtNodeInitiated" />
+            </xsl:call-template>
+
+            <br />
+            <h3 style="margin:auto; width: 90%;"><b>Once this form is approved and returned to you, then you can make travel arrangements.</b></h3>
+            <br />
+
+		  </div>
+		   <!-- Make temporary fields that will not be shown-->
+  	  <div xmlns="" id="tempInfo" style="display:none;">
+  		<xsl:call-template name="widget">
+                <xsl:with-param name="fieldName" select="'campusTemp'" />
+  	    </xsl:call-template>
+  		<xsl:call-template name="widget">
+                <xsl:with-param name="fieldName" select="'campusTitle'" />
+  	    </xsl:call-template>
+  	  </div>
+		     <!-- Requested Minor Information -->
+        <!-- <xsl:call-template name="notes" /> -->
+		</xsl:template>
+  </xsl:stylesheet></style><association><docType>UGS.TravelReq.Doctype</docType><definition>UGS.TravelReq.EDL</definition><style>UGS.TravelReq.Style</style><active>true</active></association></edoclite></data>

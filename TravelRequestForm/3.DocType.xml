@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
+  <documentTypes xmlns="ns:workflow/DocumentType" xsi:schemaLocation="ns:workflow/DocumentType resource:DocumentType">
+    <documentType>
+      <name>UGS.TravelReq.Doctype</name>
+      <description>UGS Travel Request</description>
+      <label>UGS.TravelReq.Doctype</label>
+      <postProcessorName>org.kuali.rice.edl.framework.workflow.EDocLiteDatabasePostProcessor</postProcessorName>
+      <superUserGroupName namespace="UGS.GENERAL">UGS.SuperUsers</superUserGroupName>
+      <blanketApproveGroupName namespace="KUALI">WorkflowAdmin</blanketApproveGroupName>
+      <reportingGroupName namespace="UGS.GENERAL">UGS.SuperUsers</reportingGroupName>
+      <docHandler>${workflow.url}/EDocLite</docHandler>
+      <notificationFromAddress>ugsedocs@indiana.edu</notificationFromAddress>
+      <active>true</active>
+      <policies>
+        <policy>
+          <name>DEFAULT_APPROVE</name>
+          <value>false</value>
+        </policy>
+      </policies>
+      <attributes>
+        <attribute>
+          <name>UGSTravelRequestInitiatorAttribute</name>
+        </attribute>
+        <attribute>
+          <name>UGSCampusAttribute</name>
+        </attribute>
+        <attribute>
+          <name>UGSUnivIDSearchAttribute</name>
+        </attribute>
+        <attribute>
+          <name>UGSlastNameSearchAttribute</name>
+        </attribute>
+        <attribute>
+          <name>UGSfirstNameSearchAttribute</name>
+        </attribute>
+      </attributes>
+      <routingVersion>2</routingVersion>
+      <routePaths>
+        <routePath>
+          <start name="Initiated" nextNode="UGS.TravelReqEmail"/>
+          <simple name="UGS.TravelReqEmail" nextNode="UGS.TravelReq.UGS1"/>
+          <requests name="UGS.TravelReq.UGS1" nextNode="UGS.TravelReq.InitiatorFYI"/>
+          <requests name="UGS.TravelReq.InitiatorFYI"/>
+        </routePath>
+      </routePaths>
+      <routeNodes>
+        <start name="Initiated">
+          <activationType>P</activationType>
+          <mandatoryRoute>false</mandatoryRoute>
+          <finalApproval>false</finalApproval>
+        </start>
+        <simple name="UGS.TravelReqEmail">
+          <from>ugsedocs@indiana.edu</from>
+          <to>initiator</to>
+          <testAddress>aasgriff@indiana.edu</testAddress>
+          <style>UGS.Cand.Email.Initiator</style>
+          <type>org.kuali.rice.kew.mail.EmailNode</type>
+        </simple>
+        <requests name="UGS.TravelReq.UGS1">
+          <activationType>S</activationType>
+          <ruleTemplate>UGS.TravelReq.UGS1</ruleTemplate>
+          <mandatoryRoute>true</mandatoryRoute>
+          <finalApproval>true</finalApproval>
+        </requests>
+        <requests name="UGS.TravelReq.InitiatorFYI">
+          <activationType>S</activationType>
+          <ruleTemplate>UGS.TravelReq.InitiatorFYI</ruleTemplate>
+          <mandatoryRoute>false</mandatoryRoute>
+          <finalApproval>false</finalApproval>
+        </requests>
+      </routeNodes>
+    </documentType>
+  </documentTypes>
+</data>

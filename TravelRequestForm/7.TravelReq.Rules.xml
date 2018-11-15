@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
+  <rules xmlns="ns:workflow/Rule" xsi:schemaLocation="ns:workflow/Rule resource:Rule">
+
+	<!--Final Node-->
+	<rule>
+      <name>UGS.TravelReq.UGS1</name>
+      <documentType>UGS.TravelReq.Doctype</documentType>
+      <ruleTemplate>UGS.TravelReq.UGS1</ruleTemplate>
+      <description>Final approval for the Travel Request edoc</description>
+      <forceAction>true</forceAction>
+	   <!-- <ruleExtensions>
+        <ruleExtension>
+          <attribute>UGSCampusAttribute</attribute>
+          <ruleTemplate>UGS.Exception.UGS2</ruleTemplate>
+          <ruleExtensionValues>
+            <ruleExtensionValue>
+              <key>campus</key>
+              <value>BL</value>
+            </ruleExtensionValue>
+          </ruleExtensionValues>
+        </ruleExtension>
+      </ruleExtensions> -->
+      <responsibilities>
+        <responsibility>
+          <groupName namespace="UGS.TRAVELREQ">UGS.TravelReq.UGS1</groupName>
+          <actionRequested>A</actionRequested>
+          <priority>1</priority>
+        </responsibility>
+      </responsibilities>
+    </rule>
+
+	<!-- Initiator FYI-->
+	 <rule>
+      <name>UGS.TravelReq.InitiatorFYI</name>
+      <documentType>UGS.TravelReq.Doctype</documentType>
+      <ruleTemplate>UGS.TravelReq.InitiatorFYI</ruleTemplate>
+      <description>FYI notification of final approval</description>
+      <forceAction>true</forceAction>
+      <responsibilities>
+        <responsibility>
+          <role>org.kuali.rice.kew.rule.InitiatorRoleAttribute!INITIATOR</role>
+		   <approvePolicy>F</approvePolicy>
+          <actionRequested>F</actionRequested>
+          <priority>1</priority>
+        </responsibility>
+      </responsibilities>
+    </rule>
+
+
+  </rules>
+</data>
