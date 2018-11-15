@@ -369,7 +369,9 @@
               initForm('<xsl:value-of select="$currentNode" />', '<xsl:value-of select="$isEditable" />', '<xsl:value-of select="$docStatus" />');
           </script>
           <script>
-            togglePTDates();
+            $(document).ready(function(){
+              togglePTDates();
+            });
           </script>
           <xsl:call-template name="validationMessages" />
 		  <!-- added per request. Makes Final state more Obvious -->
